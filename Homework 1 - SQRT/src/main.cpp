@@ -15,6 +15,8 @@ void function_call(T num)
 template <typename T>
 void function_call(std::vector<T>& num)
 {
+	std::vector<T> resultVect;
+
 	std::cout << "[IN]:\t";
 	for (T i : num)
 	{
@@ -22,9 +24,9 @@ void function_call(std::vector<T>& num)
 	}
 	std::cout << "\n[OUT]:\t";
 
-	jinx::my_sqr(num);
+	resultVect = jinx::my_sqr(num);
 
-	for (T i : num)
+	for (T i : resultVect)
 	{
 		std::cout << i << ' ';
 	}
@@ -35,7 +37,7 @@ int main(int argc, char** argv)
 {
 	// VARIABLES
 
-	std::vector<int> myVectorInt{ 1, -2, 3, 4, 5 };
+	std::vector<int> myVectorInt{ 1, -2, 3, 4, 5 };	
 	std::vector<double> myVectorDbl{ 1.5, 2.5, -3.5, 4.5, -5.5 };
 	int myIntNum = 25;
 	double myDblNum = 14.5;

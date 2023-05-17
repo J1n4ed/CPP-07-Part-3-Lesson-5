@@ -10,7 +10,8 @@ int main(int argc, char** argv)
 	int rows = 5;
 	int cols = 7;
 
-	jinx::Table<int> table(rows, cols);		
+	jinx::Table<int> table(rows, cols);
+	jinx::Table<int> tableCopy(rows, cols);
 
 	// BODY
 
@@ -60,6 +61,32 @@ int main(int argc, char** argv)
 	table.size(newRows, newCols);
 
 	std::cout << "Called size() method for table:\nnewRow = " << newRows << ", " << "newCols = " << newCols << '\n';
+
+	// COPY TEST
+
+	std::cout << "\n\n----------- COPY TEST --------------\n\n";
+
+	std::cout << "Making a copy of table to tableCopy" << '\n';
+
+	tableCopy = table;
+
+	int copyRows = 0;
+	int copyCols = 0;
+
+	tableCopy.size(copyRows, copyCols);
+
+	std::cout << "Called size() method for tableCopy:\ncopyRow = " << copyRows << ", " << "copyCols = " << copyCols << '\n';
+
+	std::cout << "tableCopy print:\n";
+	for (int i = 0; i < rows; ++i)
+	{
+		for (int j = 0; j < cols; ++j)
+		{
+			std::cout << table[i][j] << ' ';
+		}
+
+		std::cout << '\n';
+	}
 
 	// EXIT
 

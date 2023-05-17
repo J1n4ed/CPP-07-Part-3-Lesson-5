@@ -7,8 +7,6 @@
 
 namespace jinx
 {
-
-
 	class Functor
 	{
 	public:
@@ -28,17 +26,15 @@ namespace jinx
 
 		// Overloads
 		
-		void operator()(const std::vector<int> & numList)
+		// void operator()(const std::vector<int> & numList)
+		void operator()(const int & num)
 		{
 			// нужно реализовать функтор, который подсчитывает сумму и количество чисел, делящихся на 3.
 
-			for (int i : numList)
+			if (num % 3 == 0)
 			{
-				if (i % 3 == 0)
-				{
-					_sum += i;
-					++_counter;
-				}
+				_sum += num;
+				++_counter;		
 			}
 		} // operator()
 

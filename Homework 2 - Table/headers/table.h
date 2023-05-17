@@ -41,6 +41,36 @@ namespace jinx
 			if (index >= 0 && index < _size)
 				return _array[index];
 		}
+
+		Array & operator=(Array & other_arr)
+		{
+			if (this != &other_arr)
+			{
+
+				if (this->_size() < other_arr._size())
+				{
+					delete[] this->_array;
+					this->_size = other_arr._size;
+					_array = new T[_size] {0};
+
+					for (int i = 0; i < _size; ++i)
+					{
+						this->_array[i] = other_arr[i];
+					}
+				}
+				else if (this->_size() > other_arr._size())
+				{
+					for (int i = 0; i < other_arr._size(); ++i)
+					{
+						this->_array[i] = other_arr[i];
+					}
+				}
+
+			} // END OF if this != &other_arr
+
+			return * this;
+		}
+
 		// Constructors
 
 		Array() = delete;
@@ -82,6 +112,11 @@ namespace jinx
 
 		// Должна быть константная функция Size, возвращающая размер таблицы.
 
+		int length()
+		{
+			return _rows;
+		}
+
 		void size(int & rows, int & cols) const
 		{
 			if (_rows != -1 && _cols != -1)
@@ -105,6 +140,35 @@ namespace jinx
 		{
 			if (index >= 0 && index < _rows)
 				return *_table[index];
+		}
+
+		Table & operator=(Table& other_arr)
+		{
+			if (this != &other_arr)
+			{
+
+				if (this->length() < other_arr.length())
+				{
+					delete[] this->_table;
+					this->_rows = other_arr._rows;
+					_table = new Array<T> * [_rows];
+
+					for (int i = 0; i < _rows; ++i)
+					{
+						this->_table[i] = &other_arr[i];
+					}
+				}
+				else if (this->length() > other_arr.length())
+				{
+					for (int i = 0; i < other_arr.length(); ++i)
+					{
+						this->_table[i] = &other_arr[i];
+					}
+				}
+
+			} // END OF if this != &other_arr
+
+			return * this;
 		}
 
 		// Нужно, чтобы работали конструкции вида:
