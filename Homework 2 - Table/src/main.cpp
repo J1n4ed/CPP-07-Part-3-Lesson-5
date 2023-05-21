@@ -1,6 +1,6 @@
 // main function
 
-#include "..\headers\table.h"
+#include "..\headers\table.hpp"
 #include <iostream>
 
 int main(int argc, char** argv)
@@ -11,7 +11,7 @@ int main(int argc, char** argv)
 	int cols = 7;
 
 	jinx::Table<int> table(rows, cols);
-	jinx::Table<int> tableCopy(rows, cols);
+	jinx::Table<int> tableCopy(rows - 1, cols + 1);
 
 	// BODY
 
@@ -70,6 +70,8 @@ int main(int argc, char** argv)
 
 	tableCopy = table;
 
+	table[1][1] = 99;
+
 	int copyRows = 0;
 	int copyCols = 0;
 
@@ -82,11 +84,38 @@ int main(int argc, char** argv)
 	{
 		for (int j = 0; j < cols; ++j)
 		{
-			std::cout << table[i][j] << ' ';
+			std::cout << tableCopy[i][j] << ' ';
 		}
 
 		std::cout << '\n';
 	}
+
+	// ADDITION TESTS
+
+	std::cout << "\n\n----------- ADDITIONAL TEST --------------\n\n";
+
+	std::cout << "\nTest 1: Array<int>a1 = Array<int>a2...\n";
+	jinx::Array<int> a1(5);
+	jinx::Array<int> a2(3);
+	a1 = a2;
+	std::cout << "\nTest 1: passed.\n";
+
+	std::cout << "\nTest 2: Array<int>22(a11)...\n";
+	jinx::Array<int> a11(5);
+	jinx::Array<int> a22(a11);
+	std::cout << "\nTest 2: passed.\n";
+
+	std::cout << "\nTest 3: table1 = table2...\n";
+	jinx::Table<int> table1(2, 2);
+	jinx::Table<int> table2(4, 4);
+	table1 = table2;
+	std::cout << "\nTest 3: passed.\n";
+
+	std::cout << "\nTest 4: table1[0][0] = 100, cout table2[0][0]...\n";
+	table2[0][0] = 5;
+	table1[0][0] = 100;
+	std::cout << "\ntable2[0][0] = " << table2[0][0] << std::endl;
+	std::cout << "\nTest 4: passed.\n";
 
 	// EXIT
 
